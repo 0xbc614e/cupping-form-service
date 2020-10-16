@@ -97,7 +97,7 @@ function where(query) {
 
     let filters = [];
     for (const key in query) {
-        filters.push(`${mysql.escapeID(key)}=${mysql.escape(query[key])}`);
+        filters.push(`${mysql.escapeId(key)}=${mysql.escape(query[key])}`);
     }
     return `WHERE ${filters.join(" AND ")}`;
 }
@@ -105,7 +105,7 @@ function where(query) {
 function set(value) {
     let modifiers = [];
     for (const key in value) {
-        modifiers.push(`${mysql.escapeID(key)}=${mysql.escape(value[key])}`)
+        modifiers.push(`${mysql.escapeId(key)}=${mysql.escape(value[key])}`)
     }
     return `SET ${modifiers.join(",")}`;
 }
