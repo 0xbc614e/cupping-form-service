@@ -1,0 +1,112 @@
+{
+    "sampleID": {
+        "type": "string",
+        "nullable": false
+    },
+    "sampleRoastLevel": {
+        "type": "number",
+        "min": 1,
+        "max": 5,
+        "nullable": true
+    },
+    "fragrance": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "fragranceDry": {
+        "type": "number",
+        "min": 1,
+        "max": 5,
+        "nullable": true
+    },
+    "fragranceBreak": {
+        "type": "number",
+        "min": 1,
+        "max": 5,
+        "nullable": true
+    },
+    "flavor": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "aftertaste": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "acidity": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "acidityIntensity": {
+        "type": "number",
+        "min": 1,
+        "max": 5,
+        "nullable": true
+    },
+    "body": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "bodyLevel": {
+        "type": "number",
+        "min": 1,
+        "max": 5,
+        "nullable": true
+    },
+    "balance": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "uniformity": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "cleanCup": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "sweetness": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "overall": {
+        "type": "number",
+        "min": 0,
+        "max": 10,
+        "nullable": false
+    },
+    "defectsNumOfCups": {
+        "type": "number",
+        "min": 0,
+        "max": 5,
+        "nullable": false
+    },
+    "defectsIntensity": {
+        "type": "number",
+        "min": 0,
+        "max": 4,
+        "nullable": false
+    },
+    "notes": {
+        "type": "string",
+        "nullable": true
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "horizontalAttributes": [
+        "fragrance",
+        "flavor",
+        "aftertaste",
+        "acidity",
+        "body",
+        "balance",
+        "uniformity",
+        "cleanCup",
+        "sweetness",
+        "overall"
+    ],
+    "numericAttributes": [
+        "sampleRoastLevel",
+        "fragrance",
+        "fragranceDry",
+        "fragranceBreak",
+        "flavor",
+        "aftertaste",
+        "acidity",
+        "acidityIntensity",
+        "body",
+        "bodyLevel",
+        "balance",
+        "uniformity",
+        "cleanCup",
+        "sweetness",
+        "overall",
+        "defectsNumOfCups",
+        "defectsIntensity"
+    ]
+}
