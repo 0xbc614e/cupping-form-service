@@ -4,9 +4,12 @@ const recommender = require('../../recommender');
 
 jest.mock('../../queryProcessor');
 
+const DATASET1_CSV = "src/__tests__/data/dataset1.csv";
+const QUERY1_CSV = "src/__tests__/data/query1.csv";
+
 describe("dataset #1: form 30개", () => {
     beforeAll(() => {
-        const dbData = testUtil.importCSV('src/__tests__/data/dataset1.csv');
+        const dbData = testUtil.importCSV(DATASET1_CSV);
         queryProcessor.getForms.mockResolvedValue(dbData);
     });
     
@@ -33,7 +36,7 @@ describe("dataset #1: form 30개", () => {
     });
     
     test('본인의 폼과 비슷한 폼 추천', async () => {
-        const forms = testUtil.importCSV('src/__tests__/data/query1.csv');
+        const forms = testUtil.importCSV(QUERY1_CSV);
         const form = testUtil.bySampleID(forms, 'Sim_1');
         const results = await recommender.getSimiliar(form);
     
@@ -41,7 +44,7 @@ describe("dataset #1: form 30개", () => {
     });
     
     test('본인의 폼과 비슷하면서 flavor, body, overall 속성이 뛰어난 폼 추천', async () => {
-        const forms = testUtil.importCSV('src/__tests__/data/query1.csv');
+        const forms = testUtil.importCSV(QUERY1_CSV);
         const form = testUtil.bySampleID(forms, 'SimKey_1');
         const results = await recommender.getSimiliarByAttribute(form, ['flavor', 'body', 'overall']);
     
@@ -51,7 +54,7 @@ describe("dataset #1: form 30개", () => {
 
 describe("다른 방식의 입력 처리", () => {
     beforeAll(() => {
-        const dbData = testUtil.importCSV('src/__tests__/data/dataset1.csv');
+        const dbData = testUtil.importCSV(DATASET1_CSV);
         queryProcessor.getForms.mockResolvedValue(dbData);
     });
 
@@ -68,7 +71,7 @@ describe("다른 방식의 입력 처리", () => {
 
 describe("잘못된 입력에 대한 오류 처리", () => {
     beforeAll(() => {
-        const dbData = testUtil.importCSV('src/__tests__/data/dataset1.csv');
+        const dbData = testUtil.importCSV(DATASET1_CSV);
         queryProcessor.getForms.mockResolvedValue(dbData);
     });
 
