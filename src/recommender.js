@@ -17,9 +17,7 @@ export async function getByAttribute(attributes) {
     let scores = [];
     for (const form of forms) {
         const score = attributes.reduce((prev, curr) => {
-            const fi = lowerCasedFields.indexOf(curr.toLowerCase());
-            const f = fi != -1 ? fields[fi] : curr;
-            return prev + form[f];
+            return prev + form[fixCase(curr)];
         }, 0);
         scores.push({score, form});
     }
@@ -52,12 +50,13 @@ function sortFormsByDistance(forms, anchorForm, keyAttributes = []) {
 function getFormDistance(a, b, keyAttributes = []) {
     let result = 0;
     const p = 2;
+    keyAttributes = keyAttributes.map(value => fixCase(value));
 
     for (const attr of numericAttributes) {
         const metafield = metafields[attr];
         const isKey = keyAttributes.includes(attr);
         const aAttr = isKey ? metafield.max : a[attr];
-        
+
         let term;
         if (typeof aAttr === 'number') {
             if (typeof b[attr] === 'number') {
@@ -83,4 +82,10 @@ function getFormDistance(a, b, keyAttributes = []) {
 
     result = Math.pow(result, 1 / p);
     return result;
+}
+
+function fixCase(attribute) {
+    const fi = lowerCasedFields.indexOf(attribute.toLowerCase());
+    if (fi == -1) throw `일치하는 case가 존재하지 않습니다: ${attribute}`;
+    return fields[fi];
 }
