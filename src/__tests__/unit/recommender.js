@@ -46,7 +46,11 @@ describe("dataset #1: form 30개", () => {
     test('본인의 폼과 비슷하면서 flavor, body, overall 속성이 뛰어난 폼 추천', async () => {
         const forms = testUtil.importCSV(QUERY1_CSV);
         const form = testUtil.bySampleID(forms, 'SimKey_1');
-        const results = await recommender.getSimiliarByAttribute(form, ['flavor', 'body', 'overall']);
+        const results = await recommender.getSimiliarByAttribute(form, [
+            'flavor',
+            'body',
+            'overall',
+        ]);
     
         expect(results[0].sampleID).toEqual(form.notes);
     });
