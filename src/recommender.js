@@ -76,7 +76,7 @@ function getFormDistance(a, b, keyAttributes = []) {
             }
         }
         term /= metafield.max - metafield.min;
-        if (isKey) term *= 2;
+        if (isKey) term *= 0.5;
         result += Math.pow(Math.abs(term), p);
     }
 
