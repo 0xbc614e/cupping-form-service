@@ -105,7 +105,7 @@ function where(query) {
 function set(value) {
     let modifiers = [];
     for (const key in value) {
-        modifiers.push(`${mysql.escapeId(key)}=${mysql.escape(value[key])}`)
+        modifiers.push(`${mysql.escapeId(key)}=${mysql.escape(value[key])}`);
     }
     return `SET ${modifiers.join(",")}`;
 }
