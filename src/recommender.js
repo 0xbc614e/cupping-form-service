@@ -1,7 +1,9 @@
 import * as queryProcessor from "./queryProcessor";
 import * as metafields from "./metafields.json";
 
-const numericAttributes = Object.keys(metafields).filter(value => metafields[value].type == "number");
+const fields = Object.keys(metafields);
+const lowerCasedFields = fields.map(value => value.toLowerCase());
+const numericAttributes = fields.filter(value => metafields[value].type == "number");
 
 export async function get() {
     let forms = await queryProcessor.getForms();
@@ -14,7 +16,11 @@ export async function getByAttribute(attributes) {
 
     let scores = [];
     for (const form of forms) {
-        const score = attributes.reduce((prev, curr) => prev + form[curr], 0);
+        const score = attributes.reduce((prev, curr) => {
+            const fi = lowerCasedFields.indexOf(curr.toLowerCase());
+            const f = fi != -1 ? fields[fi] : curr;
+            return prev + form[f];
+        }, 0);
         scores.push({score, form});
     }
 
