@@ -7,6 +7,7 @@ jest.mock('../../queryProcessor');
 const DATASET1_CSV = "src/__tests__/data/dataset1.csv";
 const DATASET2_CSV = "src/__tests__/data/dataset2.csv";
 const QUERY1_CSV = "src/__tests__/data/query1.csv";
+const QUERY2_CSV = "src/__tests__/data/query2.csv";
 
 describe("dataset #1: form 30개", () => {
     beforeAll(() => {
@@ -77,6 +78,17 @@ describe("dataset #2: form 1000개", () => {
         ]);
     
         expect(results[0].notes).toEqual('flavor, acidity, body 최고득점');
+    });
+
+    test('본인의 폼과 비슷하면서 aftertaste, overall 속성이 뛰어난 폼 추천', async () => {
+        const forms = testUtil.importCSV(QUERY2_CSV);
+        const form = testUtil.bySampleID(forms, 'SimKey_2');
+        const results = await recommender.getSimiliarByAttribute(form, [
+            'aftertaste',
+            'overall',
+        ]);
+    
+        expect(results[0].sampleID).toEqual(form.notes);
     });
 });
    
