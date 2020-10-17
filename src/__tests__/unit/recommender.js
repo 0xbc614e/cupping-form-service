@@ -58,14 +58,28 @@ describe("다른 방식의 입력 처리", () => {
         queryProcessor.getForms.mockResolvedValue(dbData);
     });
 
-    test("속성은 대소문자 가리지 않아도 됨", async () => {
-        let results = await recommender.getByAttribute([
-            "Fragrance",
-            "ACIDITY",
-            "UnIfOrMiTy",
-        ]);
-
-        expect(results[0].notes).toEqual("fragrance, acidity, uniformity 최고득점");
+    describe("속성은 대소문자 가리지 않아도 됨", () => {
+        test("뛰어난 속성 추천", async () => {
+            let results = await recommender.getByAttribute([
+                "Fragrance",
+                "ACIDITY",
+                "UnIfOrMiTy",
+            ]);
+    
+            expect(results[0].notes).toEqual("fragrance, acidity, uniformity 최고득점");
+        });
+    
+        test("본인 폼 기반 뛰어난 속성 추천", async () => {
+            const forms = testUtil.importCSV(QUERY1_CSV);
+            const form = testUtil.bySampleID(forms, "SimKey_1");
+            let results = await recommender.getSimiliarByAttribute(form, [
+                "FLavor",
+                "BODY",
+                "overAll",
+            ]);
+    
+            expect(results[0].sampleID).toEqual(form.notes);
+        });
     });
 });
 
