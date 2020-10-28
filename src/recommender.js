@@ -79,8 +79,6 @@ function getFormDistance(a, b, keyAttributes = []) {
         if (isKey) term *= 0.5;
         result += Math.pow(Math.abs(term), p);
     }
-
-    result = Math.pow(result, 1 / p);
     return result;
 }
 
