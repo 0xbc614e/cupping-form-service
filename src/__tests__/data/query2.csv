@@ -1,2 +1,2 @@
-sampleID,sampleRoastLevel,fragrance,fragranceDry,fragranceBreak,flavor,aftertaste,acidity,acidityIntensity,body,bodyLevel,balance,uniformity,cleanCup,sweetness,overall,defectsNumOfCups,defectsIntensity,notes
-SimKey_2,3,8,3,4,7.25,7.25,7.5,2,6.75,3,7.25,10,10,10,6.5,0,0,No_430
+evaluation_index,sample,roastingLevel,fragAroma,flavor,afterTaste,acidity,bodiness,balance,uniformity,cleanCup,sweetness,overall,defects,total,user_num
+100001,SimKey_2,3,8,7.25,7.25,7.5,6.75,7.25,10,10,10,6.5,0,80.5,0
