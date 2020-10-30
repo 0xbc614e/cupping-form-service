@@ -157,9 +157,5 @@ describe('DB 제어', () => {
             const users = await queryProcessor.getUsers();
             expect(users.length).toBeGreaterThanOrEqual(previousUsers.length + 2);
         });
-
-        test('잘못된 ip 사용 방지', () => {
-            return expect(queryProcessor.addUser("427.0.0.2", "Celia")).rejects.toBeTruthy();
-        });
     });
 });
