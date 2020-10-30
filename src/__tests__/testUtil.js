@@ -19,5 +19,5 @@ export function importCSV(filename) {
 }
 
 export function bySampleID(forms, id) {
-    return forms.find(form => form.sampleID == id);
+    return forms.find(form => form.sample == id);
 }
