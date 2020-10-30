@@ -10,24 +10,5 @@
         "cleanCup",
         "sweetness",
         "overall"
-    ],
-    "numericAttributes": [
-        "sampleRoastLevel",
-        "fragrance",
-        "fragranceDry",
-        "fragranceBreak",
-        "flavor",
-        "aftertaste",
-        "acidity",
-        "acidityIntensity",
-        "body",
-        "bodyLevel",
-        "balance",
-        "uniformity",
-        "cleanCup",
-        "sweetness",
-        "overall",
-        "defectsNumOfCups",
-        "defectsIntensity"
     ]
 }
