@@ -6,6 +6,7 @@ jest.mock('../../queryProcessor');
 
 const DATASET1_CSV = "src/__tests__/data/dataset1.csv";
 const DATASET2_CSV = "src/__tests__/data/dataset2.csv";
+const DEMO_CSV = "src/__tests__/data/demo.csv";
 const QUERY1_CSV = "src/__tests__/data/query1.csv";
 const QUERY2_CSV = "src/__tests__/data/query2.csv";
 
@@ -92,6 +93,19 @@ describe("dataset #2: form 1000개", () => {
     });
 });
    
+describe("demo dataset: form 30개", () => {
+    beforeAll(() => {
+        const dbData = testUtil.importCSV(DEMO_CSV);
+        queryProcessor.getForms.mockResolvedValue(dbData);
+    });
+
+    test('가장 좋은 폼 추천', async () => {
+        const results = await recommender.get();
+        
+        expect(results[0].evaluation_index).toBe(8);
+    });
+});
+ 
 describe("다른 방식의 입력 처리", () => {
     beforeAll(() => {
         const dbData = testUtil.importCSV(DATASET1_CSV);
