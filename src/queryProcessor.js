@@ -9,6 +9,8 @@ const dbConfig = {
     password : env.USER_PASSWORD,
     database : env.DATABASE_NAME,
 };
+const tableForm = env.TABLE_FORM;
+const tableUser = env.TABLE_USER;
 
 let connection = mysql.createConnection(dbConfig);
 
@@ -32,11 +34,11 @@ export function disconnect() {
 
 export function addForm(form, user) {
     const record = {ip: user.ip, ...form};
-    return singleQuery(insert(record, "Form"));
+    return singleQuery(insert(record, tableForm));
 }
 
 export async function getForms(queryInfo) {
-    const queryResult = await singleQuery(`SELECT * FROM Form ${where(queryInfo)};`);
+    const queryResult = await singleQuery(`SELECT * FROM ${tableForm} ${where(queryInfo)};`);
 
     let result = [];
     for (const q of queryResult) {
@@ -46,31 +48,31 @@ export async function getForms(queryInfo) {
 }
 
 export async function modifyForms(queryInfo, valueInfo) {
-    return await singleQuery(`UPDATE Form ${set(valueInfo)} ${where(queryInfo)};`);
+    return await singleQuery(`UPDATE ${tableForm} ${set(valueInfo)} ${where(queryInfo)};`);
 }
 
 export async function removeForms(queryInfo) {
-    return await singleQuery(`DELETE FROM Form ${where(queryInfo)};`);
+    return await singleQuery(`DELETE FROM ${tableForm} ${where(queryInfo)};`);
 }
 
 export async function clearForms() {
-    return await singleQuery("DELETE FROM Form;");
+    return await singleQuery(`DELETE FROM ${tableForm};`);
 }
 
 export async function addUser(ip, name) {
-    return await singleQuery(`INSERT INTO User (ip, name) VALUES (${mysql.escape(ip)}, ${mysql.escape(name)});`);
+    return await singleQuery(`INSERT INTO ${tableUser} (ip, name) VALUES (${mysql.escape(ip)}, ${mysql.escape(name)});`);
 }
 
 export async function getUser(ip) {
-    return await singleQuery(`SELECT ip, name FROM User WHERE ip=${mysql.escape(ip)};`);
+    return await singleQuery(`SELECT ip, name FROM ${tableUser} WHERE ip=${mysql.escape(ip)};`);
 }
 
 export async function getUsers() {
-    return await singleQuery("SELECT ip, name FROM User;");
+    return await singleQuery(`SELECT ip, name FROM ${tableUser};`);
 }
 
 export async function clearUsers() {
-    return await singleQuery("DELETE FROM User;");
+    return await singleQuery(`DELETE FROM ${tableUser};`);
 }
 
 function singleQuery(sql) {
@@ -93,7 +95,7 @@ function insert(obj, table) {
 }
 
 function where(query) {
-    if (typeof query === "undefined") return "";
+    if (typeof query === "undefined" || query.length == 0) return "";
 
     let filters = [];
     for (const key in query) {
