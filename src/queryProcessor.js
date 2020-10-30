@@ -93,7 +93,7 @@ function insert(obj, table) {
 }
 
 function where(query) {
-    if (typeof query === "undefined") return "";
+    if (typeof query === "undefined" || query.length == 0) return "";
 
     let filters = [];
     for (const key in query) {
