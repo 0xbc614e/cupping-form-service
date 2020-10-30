@@ -1,10 +1,10 @@
 {
     "horizontalAttributes": [
-        "fragrance",
+        "fragAroma",
         "flavor",
-        "aftertaste",
+        "afterTaste",
         "acidity",
-        "body",
+        "bodiness",
         "balance",
         "uniformity",
         "cleanCup",

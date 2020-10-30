@@ -3,7 +3,7 @@ import * as metafields from "./metafields.json";
 
 const fields = Object.keys(metafields);
 const lowerCasedFields = fields.map(value => value.toLowerCase());
-const numericAttributes = fields.filter(value => metafields[value].type == "number");
+const numericAttributes = require("./fields.json").horizontalAttributes;
 
 export async function get() {
     let forms = await queryProcessor.getForms();
