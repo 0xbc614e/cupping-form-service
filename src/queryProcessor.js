@@ -34,11 +34,11 @@ export function disconnect() {
 
 export function addForm(form, user) {
     const record = {ip: user.ip, ...form};
-    return singleQuery(insert(record, tableForm));
+    return singleQuery(insertInto(tableForm, record));
 }
 
 export async function getForms(queryInfo) {
-    const queryResult = await singleQuery(`SELECT * FROM ${tableForm} ${where(queryInfo)};`);
+    const queryResult = await singleQuery(selectFrom(tableForm, queryInfo));
 
     let result = [];
     for (const q of queryResult) {
@@ -48,31 +48,31 @@ export async function getForms(queryInfo) {
 }
 
 export async function modifyForms(queryInfo, valueInfo) {
-    return await singleQuery(`UPDATE ${tableForm} ${set(valueInfo)} ${where(queryInfo)};`);
+    return await singleQuery(updateSet(tableForm, valueInfo, queryInfo));
 }
 
 export async function removeForms(queryInfo) {
-    return await singleQuery(`DELETE FROM ${tableForm} ${where(queryInfo)};`);
+    return await singleQuery(deleteFrom(tableForm, queryInfo));
 }
 
 export async function clearForms() {
-    return await singleQuery(`DELETE FROM ${tableForm};`);
+    return await singleQuery(deleteFrom(tableForm));
 }
 
 export async function addUser(ip, name) {
-    return await singleQuery(`INSERT INTO ${tableUser} (ip, name) VALUES (${mysql.escape(ip)}, ${mysql.escape(name)});`);
+    return await singleQuery(insertInto(tableUser, {ip, name}));
 }
 
 export async function getUser(ip) {
-    return await singleQuery(`SELECT ip, name FROM ${tableUser} WHERE ip=${mysql.escape(ip)};`);
+    return await singleQuery(selectFrom(tableUser, {ip}, ["ip", "name"]));
 }
 
 export async function getUsers() {
-    return await singleQuery(`SELECT ip, name FROM ${tableUser};`);
+    return await singleQuery(selectFrom(tableUser, undefined, ["ip", "name"]));
 }
 
 export async function clearUsers() {
-    return await singleQuery(`DELETE FROM ${tableUser};`);
+    return await singleQuery(deleteFrom(tableUser));
 }
 
 function singleQuery(sql) {
@@ -84,14 +84,30 @@ function singleQuery(sql) {
     });
 }
 
-function insert(obj, table) {
+function selectFrom(table, query, column) {
+    let columnString;
+    if (typeof column === 'undefined' || column.length == 0) columnString = "*";
+    else columnString = column.map(value => mysql.escapeId(value)).join(",");
+
+    return `SELECT ${columnString} FROM ${mysql.escapeId(table)} ${where(query)};`;
+}
+
+function insertInto(table, obj) {
     let attributes = [];
     let values = [];
     for (const key in obj) {
         attributes.push(mysql.escapeId(key));
         values.push(mysql.escape(obj[key]));
     }
-    return `INSERT INTO ${table}(${attributes.join(",")}) VALUES (${values.join(",")});`;
+    return `INSERT INTO ${mysql.escapeId(table)}(${attributes.join(",")}) VALUES (${values.join(",")});`;
+}
+
+function updateSet(table, value, query) {
+    return `UPDATE ${mysql.escapeId(table)} ${set(value)} ${where(query)};`;
+}
+
+function deleteFrom(table, query) {
+    return `DELETE FROM ${mysql.escapeId(table)} ${where(query)};`;
 }
 
 function where(query) {
