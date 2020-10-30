@@ -1,112 +1,76 @@
 {
-    "sampleID": {
-        "type": "string",
-        "nullable": false
+    "evaluation_index": {
+        "type": "id"
     },
-    "sampleRoastLevel": {
+    "sample": {
+        "type": "string"
+    },
+    "roastingLevel": {
         "type": "number",
         "min": 1,
-        "max": 5,
-        "nullable": true
+        "max": 5
     },
-    "fragrance": {
+    "fragAroma": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
-    },
-    "fragranceDry": {
-        "type": "number",
-        "min": 1,
-        "max": 5,
-        "nullable": true
-    },
-    "fragranceBreak": {
-        "type": "number",
-        "min": 1,
-        "max": 5,
-        "nullable": true
+        "max": 10
     },
     "flavor": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
+        "max": 10
     },
-    "aftertaste": {
+    "afterTaste": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
+        "max": 10
     },
     "acidity": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
+        "max": 10
     },
-    "acidityIntensity": {
-        "type": "number",
-        "min": 1,
-        "max": 5,
-        "nullable": true
-    },
-    "body": {
+    "bodiness": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
-    },
-    "bodyLevel": {
-        "type": "number",
-        "min": 1,
-        "max": 5,
-        "nullable": true
+        "max": 10
     },
     "balance": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
+        "max": 10
     },
     "uniformity": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
+        "max": 10
     },
     "cleanCup": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
+        "max": 10
     },
     "sweetness": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
+        "max": 10
     },
     "overall": {
         "type": "number",
         "min": 0,
-        "max": 10,
-        "nullable": false
+        "max": 10
     },
-    "defectsNumOfCups": {
+    "defects": {
         "type": "number",
         "min": 0,
-        "max": 5,
-        "nullable": false
+        "max": 20
     },
-    "defectsIntensity": {
+    "total": {
         "type": "number",
-        "min": 0,
-        "max": 4,
-        "nullable": false
+        "min": -20,
+        "max": 100
     },
-    "notes": {
-        "type": "string",
-        "nullable": true
+    "user_num": {
+        "type": "id"
     }
 }
