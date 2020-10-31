@@ -61,25 +61,27 @@ describe('DB 제어', () => {
 
     describe('커핑 폼 DB 제어', () => {
         const testUser = {
-            ip: "127.0.0.2",
-            name: "tester",
+            user_num: 0,
+            user_name: "tester",
+            user_id: "test",
+            user_password: "xccfgll"
         };
         
         beforeEach(async () => {
             await queryProcessor.clearForms();
             await queryProcessor.clearUsers();
 
-            await queryProcessor.addUser(testUser.ip, testUser.name);
+            await queryProcessor.addUser(testUser);
         });
 
         test('데이터베이스에 폼 업로드 및 삭제', async () => {
             const targets = testUtil.importCSV('src/__tests__/data/query1.csv');
             for (const target of targets) {
-                await queryProcessor.addForm(target, testUser);
+                await queryProcessor.addForm(target);
             }
 
             const query = {
-                ip: testUser.ip,
+                user_num: testUser.user_num,
                 sampleID: "Sim_1"
             };
             const results = await queryProcessor.getForms(query);
@@ -92,13 +94,13 @@ describe('DB 제어', () => {
         });
         
         test('데이터베이스에 다량의 폼 업로드', async () => {
-            const query = {ip: testUser.ip};
+            const query = {user_num: testUser.user_num};
             let forms = await queryProcessor.getForms(query);
             const previousNum = forms.length;
 
             const targets = testUtil.importCSV('src/__tests__/data/dataset1.csv');
             for (const target of targets) {
-                await queryProcessor.addForm(target, testUser);
+                await queryProcessor.addForm(target);
             }
 
             forms = await queryProcessor.getForms(query);
@@ -108,21 +110,21 @@ describe('DB 제어', () => {
 
         const invalidForms = require('../data/invalidForms.json');
         test.each(invalidForms)('잘못된 폼 업로드 방지', async (invalidForm) => {
-            return expect(queryProcessor.addForm(invalidForm, testUser)).rejects.toBeTruthy();
+            return expect(queryProcessor.addForm(invalidForm)).rejects.toBeTruthy();
         });
 
         test("폼 수정", async () => {
             const targets = testUtil.importCSV('src/__tests__/data/query1.csv');
             for (const target of targets) {
-                await queryProcessor.addForm(target, testUser);
+                await queryProcessor.addForm(target);
             }
 
             const query = {
-                ip: testUser.ip,
+                user_num: testUser.user_num,
                 sampleID: "SimKey_1"
             };
             const valueInfo = {
-                fragrance: 8.75,
+                fragAroma: 8.75,
                 overall: 8.25
             };
             await queryProcessor.modifyForms(query, valueInfo);
@@ -136,9 +138,9 @@ describe('DB 제어', () => {
         const invalidValueInfo = require("../data/invalidValueInfo.json");
         test.each(invalidValueInfo)("잘못된 폼 수정", async invalidValueInfo => {
             const target = testUtil.importCSV('src/__tests__/data/query1.csv')[0];
-            await queryProcessor.addForm(target, testUser);
+            await queryProcessor.addForm(target);
 
-            return expect(queryProcessor.modifyForms({ip: testUser.ip}, invalidValueInfo)).rejects.toBeTruthy();
+            return expect(queryProcessor.modifyForms({user_num: testUser.user_num}, invalidValueInfo)).rejects.toBeTruthy();
         });
     });
 
@@ -151,9 +153,17 @@ describe('DB 제어', () => {
         test('사용자 추가', async () => {
             const previousUsers = await queryProcessor.getUsers();
 
-            await queryProcessor.addUser("127.0.0.2", "Alice");
-            await queryProcessor.addUser("127.0.0.3", "Bob");
-
+            await queryProcessor.addUser({
+                user_name: "Alice",
+                user_id: "a12345",
+                user_password: "xcv$g"
+            });
+            await queryProcessor.addUser({
+                user_name: "Bob",
+                user_id: "bobobobobob",
+                user_password: "b99b90df00)"
+            });
+            
             const users = await queryProcessor.getUsers();
             expect(users.length).toBeGreaterThanOrEqual(previousUsers.length + 2);
         });
