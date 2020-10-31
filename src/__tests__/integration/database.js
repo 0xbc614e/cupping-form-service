@@ -109,7 +109,7 @@ describe('DB 제어', () => {
         });
 
         const invalidForms = require('../data/invalidForms.json');
-        test.each(invalidForms)('잘못된 폼 업로드 방지', async (invalidForm) => {
+        test.each(invalidForms)('잘못된 폼 업로드 방지 %#', async (invalidForm) => {
             return expect(queryProcessor.addForm(invalidForm)).rejects.toBeTruthy();
         });
 
@@ -136,7 +136,7 @@ describe('DB 제어', () => {
         });
 
         const invalidValueInfo = require("../data/invalidValueInfo.json");
-        test.each(invalidValueInfo)("잘못된 폼 수정", async invalidValueInfo => {
+        test.each(invalidValueInfo)("잘못된 폼 수정(query: %o)", async invalidValueInfo => {
             const target = testUtil.importCSV('src/__tests__/data/query1.csv')[0];
             await queryProcessor.addForm(target);
 
