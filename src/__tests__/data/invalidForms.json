@@ -37,23 +37,6 @@
     },
     {
         "evaluation_index": 0,
-        "sample": "missing flavor",
-        "roastingLevel": 4,
-        "fragAroma": 6.25,
-        "aftertaste": 7.0,
-        "acidity": 7.5,
-        "bodiness": 8.0,
-        "balance": 7.25,
-        "uniformity": 10,
-        "cleanCup": 10,
-        "sweetness": 8,
-        "overall": 7.25,
-        "total": 79,
-        "defects": 0,
-        "user_num": 0
-    },
-    {
-        "evaluation_index": 0,
         "sample": "missing defects",
         "roastingLevel": 4,
         "fragAroma": 6.25,
