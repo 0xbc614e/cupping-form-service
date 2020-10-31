@@ -32,9 +32,8 @@ export function disconnect() {
     });
 }
 
-export function addForm(form, user) {
-    const record = {ip: user.ip, ...form};
-    return singleQuery(insertInto(tableForm, record));
+export function addForm(form) {
+    return singleQuery(insertInto(tableForm, form));
 }
 
 export async function getForms(queryInfo) {
@@ -59,16 +58,16 @@ export async function clearForms() {
     return await singleQuery(deleteFrom(tableForm));
 }
 
-export async function addUser(ip, name) {
-    return await singleQuery(insertInto(tableUser, {ip, name}));
+export async function addUser(userInfo) {
+    return await singleQuery(insertInto(tableUser, userInfo));
 }
 
-export async function getUser(ip) {
-    return await singleQuery(selectFrom(tableUser, {ip}, ["ip", "name"]));
+export async function getUser(queryInfo) {
+    return await singleQuery(selectFrom(tableUser, queryInfo));
 }
 
 export async function getUsers() {
-    return await singleQuery(selectFrom(tableUser, undefined, ["ip", "name"]));
+    return await singleQuery(selectFrom(tableUser));
 }
 
 export async function clearUsers() {
