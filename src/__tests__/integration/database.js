@@ -82,7 +82,7 @@ describe('DB 제어', () => {
 
             const query = {
                 user_num: testUser.user_num,
-                sampleID: "Sim_1"
+                sample: "Sim_1"
             };
             const results = await queryProcessor.getForms(query);
             expect(results.length).not.toBe(0);
@@ -121,7 +121,7 @@ describe('DB 제어', () => {
 
             const query = {
                 user_num: testUser.user_num,
-                sampleID: "SimKey_1"
+                sample: "SimKey_1"
             };
             const valueInfo = {
                 fragAroma: 8.75,
