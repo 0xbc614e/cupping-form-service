@@ -14,7 +14,7 @@ export default class Form {
     }
 
     get totalScore() {
-        return horizontalAttributes.reduce((prev, curr) => prev + curr, 0);
+        return horizontalAttributes.reduce((prev, curr) => prev + this[curr], 0);
     }
 
     get finalScore() {
