@@ -3,7 +3,7 @@ import * as metafields from "./metafields.json";
 
 const fields = Object.keys(metafields);
 const lowerCasedFields = fields.map(value => value.toLowerCase());
-const numericAttributes = require("./fields.json").horizontalAttributes;
+const {horizontalAttributes} = require("./fields.json");
 
 export async function get() {
     let forms = await queryProcessor.getForms();
@@ -52,7 +52,7 @@ function getFormDistance(a, b, keyAttributes = []) {
     const p = 2;
     keyAttributes = keyAttributes.map(value => fixCase(value));
 
-    for (const attr of numericAttributes) {
+    for (const attr of horizontalAttributes) {
         const metafield = metafields[attr];
         const isKey = keyAttributes.includes(attr);
         const aAttr = isKey ? metafield.max : a[attr];
