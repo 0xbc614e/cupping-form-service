@@ -2,15 +2,10 @@
     "evaluation_index": {
         "type": "id"
     },
-    "sample": {
+    "form_name": {
         "type": "string"
     },
-    "roastingLevel": {
-        "type": "number",
-        "min": 1,
-        "max": 5
-    },
-    "fragAroma": {
+    "fragrance": {
         "type": "number",
         "min": 0,
         "max": 10
@@ -30,7 +25,7 @@
         "min": 0,
         "max": 10
     },
-    "bodiness": {
+    "body": {
         "type": "number",
         "min": 0,
         "max": 10
@@ -59,16 +54,6 @@
         "type": "number",
         "min": 0,
         "max": 10
-    },
-    "defects": {
-        "type": "number",
-        "min": 0,
-        "max": 20
-    },
-    "total": {
-        "type": "number",
-        "min": -20,
-        "max": 100
     },
     "user_num": {
         "type": "id"
