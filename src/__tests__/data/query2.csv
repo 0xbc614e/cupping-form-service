@@ -1,2 +1,2 @@
-evaluation_index,sample,roastingLevel,fragAroma,flavor,afterTaste,acidity,bodiness,balance,uniformity,cleanCup,sweetness,overall,defects,total,user_num
-100001,SimKey_2,3,8,7.25,7.25,7.5,6.75,7.25,10,10,10,6.5,0,80.5,0
+evaluation_index,form_name,fragrance,flavor,afterTaste,acidity,bodiness,balance,uniformity,cleanCup,sweetness,overall,user_num
+100001,SimKey_2,8,7.25,7.25,7.5,6.75,7.25,10,10,10,6.5,0

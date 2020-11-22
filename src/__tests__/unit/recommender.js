@@ -22,14 +22,14 @@ describe("dataset #1: form 30개", () => {
     });
     
     test('fragrance 속성이 뛰어난 폼 추천', async () => {
-        const results = await recommender.getByAttribute(['fragAroma']);
+        const results = await recommender.getByAttribute(['fragrance']);
     
         expect(results[0].evaluation_index).toBe(21);
     });
     
     test('세 가지 속성이 뛰어난 폼 추천', async () => {
         const results = await recommender.getByAttribute([
-            'fragAroma',
+            'fragrance',
             'acidity',
             'uniformity',
         ]);
@@ -101,7 +101,7 @@ describe("다른 방식의 입력 처리", () => {
     describe("속성은 대소문자 가리지 않아도 됨", () => {
         test("뛰어난 속성 추천", async () => {
             let results = await recommender.getByAttribute([
-                "Fragaroma",
+                "Fragrance",
                 "ACIDITY",
                 "UnIfOrMiTy",
             ]);
@@ -130,10 +130,10 @@ describe("잘못된 입력에 대한 오류 처리", () => {
     });
 
     test("유효하지 않은 속성", () => {
-        return expect(recommender.getByAttribute(["fragAroma", "aroma"])).rejects.toBeTruthy();
+        return expect(recommender.getByAttribute(["fragrance", "aroma"])).rejects.toBeTruthy();
     });
 
     test("속성은 string이 아닌 array<string>", () => {
-        return expect(recommender.getByAttribute("fragAroma")).rejects.toBeTruthy();
+        return expect(recommender.getByAttribute("fragrance")).rejects.toBeTruthy();
     });
 });
