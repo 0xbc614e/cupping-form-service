@@ -18,6 +18,6 @@ export function importCSV(filename) {
     return result;
 }
 
-export function bySampleID(forms, id) {
+export function byFormName(forms, id) {
     return forms.find(form => form.form_name == id);
 }

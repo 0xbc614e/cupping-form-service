@@ -26,12 +26,12 @@ export async function getByAttribute(attributes) {
     return scores.map(value => value.form);
 }
 
-export async function getSimiliar(form) {
+export async function getSimilar(form) {
     let forms = await queryProcessor.getForms();
     return sortFormsByDistance(forms, form);
 }
 
-export async function getSimiliarByAttribute(form, attributes) {
+export async function getSimilarByAttribute(form, attributes) {
     let forms = await queryProcessor.getForms();
     return sortFormsByDistance(forms, form, attributes);
 }

@@ -39,16 +39,16 @@ describe("dataset #1: form 30개", () => {
     
     test('본인의 폼과 비슷한 폼 추천', async () => {
         const forms = testUtil.importCSV(QUERY1_CSV);
-        const form = testUtil.bySampleID(forms, 'Sim_1');
-        const results = await recommender.getSimiliar(form);
+        const form = testUtil.byFormName(forms, 'Sim_1');
+        const results = await recommender.getSimilar(form);
     
         expect(results[0].evaluation_index).toBe(18);
     });
     
     test('본인의 폼과 비슷하면서 flavor, body, overall 속성이 뛰어난 폼 추천', async () => {
         const forms = testUtil.importCSV(QUERY1_CSV);
-        const form = testUtil.bySampleID(forms, 'SimKey_1');
-        const results = await recommender.getSimiliarByAttribute(form, [
+        const form = testUtil.byFormName(forms, 'SimKey_1');
+        const results = await recommender.getSimilarByAttribute(form, [
             'flavor',
             'bodiness',
             'overall',
@@ -82,8 +82,8 @@ describe("dataset #2: form 1000개", () => {
 
     test('본인의 폼과 비슷하면서 aftertaste, overall 속성이 뛰어난 폼 추천', async () => {
         const forms = testUtil.importCSV(QUERY2_CSV);
-        const form = testUtil.bySampleID(forms, 'SimKey_2');
-        const results = await recommender.getSimiliarByAttribute(form, [
+        const form = testUtil.byFormName(forms, 'SimKey_2');
+        const results = await recommender.getSimilarByAttribute(form, [
             'afterTaste',
             'overall',
         ]);
@@ -111,8 +111,8 @@ describe("다른 방식의 입력 처리", () => {
     
         test("본인 폼 기반 뛰어난 속성 추천", async () => {
             const forms = testUtil.importCSV(QUERY1_CSV);
-            const form = testUtil.bySampleID(forms, "SimKey_1");
-            let results = await recommender.getSimiliarByAttribute(form, [
+            const form = testUtil.byFormName(forms, "SimKey_1");
+            let results = await recommender.getSimilarByAttribute(form, [
                 "FLavor",
                 "BODINESS",
                 "overAll",
