@@ -121,6 +121,14 @@ describe("다른 방식의 입력 처리", () => {
             expect(results[0].evaluation_index).toBe(1);
         });
     });
+
+    test("유사한 폼 추천에 자기 자신은 끼지 않음", async () => {
+        const dbData = testUtil.importCSV(DATASET1_CSV);
+        const form = dbData[0];
+
+        const result = await recommender.getSimilar(form);
+        expect(result[0]).not.toEqual(form);
+    });
 });
 
 describe("잘못된 입력에 대한 오류 처리", () => {
